@@ -54,20 +54,20 @@ Connecting to Your Multiworld Slot
 
 Other Gameplay Instructions
 - The hub world consists of 12 sets of pipes. Each of these sets represents a world, and each world has 8 levels. The levels are organized within each set like this:
-||||||||LAND|||||||
-||||           ||||
-|||| [7]   [8] ||||
-||||           ||||
-|||             |||
-||| [5]     [6] |||
-|||             |||
-||               ||
-|| [3]       [4] ||
-||               ||
-|                 |
-| [1]         [2] |
-|                 |
-~~~~~~~WATER~~~~~~~
+████████LAND███████
+████           ████
+████ [7]   [8] ████
+████           ████
+███             ███
+███ [5]     [6] ███
+███             ███
+██               ██
+██ [3]       [4] ██
+██               ██
+█                 █
+█ [1]         [2] █
+█                 █
+~ ~ ~ ~WATER~ ~ ~ ~
 
 - The secondary nozzles you recive can be switched to using the D-Pad. The Commands are as follows:
 Hover Nozzle: Left
