@@ -7,9 +7,9 @@ Prerequisites
 - (Optional) Download the most recent version of Universal Tracker: https://github.com/FarisTheAncient/Archipelago/releases
 
 Adding the .apworld to your custom_worlds
-[Option 1]
+- [Option 1]
 1. Open the smsa2.apworld file. This will create a copy in the custom_worlds folder
-[Option 2]
+- [Option 2]
 1. Open the Archipelago launcher
 2. Locate the **Browse Files** option and select it. This will open a new File Explorer window
 3. Within the Archipelago folder, locate and open the **custom_worlds** folder
@@ -53,29 +53,29 @@ Connecting to Your Multiworld Slot
 9. Input your password (if necessary) and your slot name when prompted
 
 Other Gameplay Instructions
-- The hub world consists of 12 sets of pipes. Each of these sets represents a world, and each world has 8 levels. The levels are organized within each set like this:
-████████LAND███████
-████ . . . . . ████
-████ [7] . [8] ████
-████ . . . . . ████
-███ . . . . . . ███
-███ [5] . . [6] ███
-███ . . . . . . ███
-██ . . . . . . . ██
-██ [3] . . . [4] ██
-██ . . . . . . . ██
-█ . . . . . . . . █
-█ [1] . . . . [2] █
-█ . . . . . . . . █
-~ ~ ~  WATER ~ ~ ~
+1. The hub world consists of 12 sets of pipes. Each of these sets represents a world, and each world has 8 levels. The levels are organized within each set like this:
+- ████████LAND███████
+- ████ . . . . . ████
+- ████ [7] . [8] ████
+- ████ . . . . . ████
+- ███ . . . . . . ███
+- ███ [5] . . [6] ███
+- ███ . . . . . . ███
+- ██ . . . . . . . ██
+- ██ [3] . . . [4] ██
+- ██ . . . . . . . ██
+- █ . . . . . . . . █
+- █ [1] . . . . [2] █
+- █ . . . . . . . . █
+- ~ ~ ~  WATER ~ ~ ~
 
-- The secondary nozzles you recive can be switched to using the D-Pad. The Commands are as follows:
-Hover Nozzle: Left
-Rocket Nozzle: Up
-Turbo Nozzle: Right
+2. The secondary nozzles you recive can be switched to using the D-Pad. The Commands are as follows:
+- Hover Nozzle: Left
+- Rocket Nozzle: Up
+- Turbo Nozzle: Right
 
-- You can access levels using thier associated level Ticket. Each ticket has a name titled "World 1 Ticket" Through "World 12 Ticket". Each ticket unlocks its associated World's levels 1 through 8, with the exception of the following:
-World 1: Levels 1-6 and 1-8 are not in the randomizer due to issues with the memory addresses of thier Shine Sprites and Blue Coins
-World 12: Level 12-8 is the Goal Level and has it's own ticket
+3. You can access levels using thier associated level Ticket. Each ticket has a name titled "World 1 Ticket" Through "World 12 Ticket". Each ticket unlocks its associated World's levels 1 through 8, with the exception of the following:
+- World 1: Levels 1-6 and 1-8 are not in the randomizer due to issues with the memory addresses of thier Shine Sprites and Blue Coins
+- World 12: Level 12-8 is the Goal Level and has it's own ticket
 
 For any remaining issues, as well as other information about the randomizer, please visit the SMSA2AP Dev Documents at https://docs.google.com/spreadsheets/d/1GR2YlgtzbS9nE8lbuc8qBnGu7zM443l06eFABxiX4w4/edit?usp=sharing
