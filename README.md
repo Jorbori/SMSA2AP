@@ -71,8 +71,9 @@ Other Gameplay Instructions
 
 2. The secondary nozzles you recive can be switched to using the D-Pad. The Commands are as follows:
 - Hover Nozzle: Left
-- Rocket Nozzle: Up
+- Rocket Nozzle: Down
 - Turbo Nozzle: Right
+- Bubble Nozzle: Up
 
 3. You can access levels using thier associated level Ticket. Each ticket has a name titled "World 1 Ticket" Through "World 12 Ticket". Each ticket unlocks its associated World's levels 1 through 8, with the exception of the following:
 - World 1: Levels 1-6 and 1-8 are not in the randomizer due to issues with the memory addresses of thier Shine Sprites and Blue Coins
