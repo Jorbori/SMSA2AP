@@ -1,0 +1,47 @@
+from .smsa2_region_helper import *
+
+WORLD1: Smsa2Region = Smsa2Region(
+    Smsa2RegionName.WORLD1,
+    ticketed = "World 1 Ticket",
+    shines = [
+        Shine("1-1 Shine", in_game_bit = 86),
+        Shine("1-2 Shine", in_game_bit = 87),
+        Shine("1-3 Shine", in_game_bit = 88, 
+                standard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.bubble]])),
+        Shine("1-4 Shine", in_game_bit = 89, 
+            standard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.bubble]]), 
+            hard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.bubble]])),
+        Shine("1-5 Shine", in_game_bit = 90),
+        Shine("1-6 Shine", in_game_bit = 91, 
+            standard = Requirements([[NozzleType.spray], [NozzleType.hover]]), 
+            hard = Requirements([[NozzleType.spray], [NozzleType.hover], [NozzleType.rocket], [NozzleType.turbo]]), 
+            expert = Requirements([[NozzleType.spray], [NozzleType.hover], [NozzleType.rocket], [NozzleType.turbo]])),
+        Shine("1-7 Shine", in_game_bit = 92, 
+            standard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.bubble]]), 
+            hard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.turbo], [NozzleType.bubble]])),
+        Shine("1-8 Shine", in_game_bit = 93, 
+            standard = Requirements([[NozzleType.hover], [NozzleType.bubble]]), 
+            hard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.bubble]]))
+    ],
+    blue_coins = [
+        BlueCoin("1-1", in_game_bit = 121),
+        BlueCoin("1-2", in_game_bit = 122),
+        BlueCoin("1-3", in_game_bit = 123, 
+            standard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.bubble]]), 
+            hard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.turbo], [NozzleType.bubble]]),
+            expert = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.turbo], [NozzleType.bubble]])),
+        BlueCoin("1-4", in_game_bit = 124, 
+            standard = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.bubble]])),
+        BlueCoin("1-5", in_game_bit = 125),
+        BlueCoin("1-6", in_game_bit = 126),
+        BlueCoin("1-7", in_game_bit = 127, 
+            standard = Requirements([[NozzleType.rocket], [NozzleType.bubble]]), 
+            hard = Requirements([[NozzleType.rocket], [TURBO_AND_HOVER], [NozzleType.bubble]]), 
+            expert = Requirements([[NozzleType.rocket], [TURBO_AND_HOVER], [SPRAY_AND_TURBO], [NozzleType.bubble]])),
+        BlueCoin("1-8", in_game_bit = 128, 
+            standard = Requirements([[NozzleType.hover]]), 
+            hard = Requirements([[NozzleType.hover], [NozzleType.rocket]]), 
+            expert = Requirements([[NozzleType.hover], [NozzleType.rocket], [NozzleType.turbo]])),
+    ],
+    parent_region = "Menu"
+)

@@ -1,125 +1,109 @@
 from typing import TYPE_CHECKING
 
-from BaseClasses import CollectionState, Region, ItemClassification
-from .items import Smsa2Item
-from .locations import Smsa2Location
-from .static_logic import ALL_REGIONS, Smsa2Region, Shine, BlueCoin, Requirements, NozzleType
+from ..generic.Rules import add_rule
+from BaseClasses import Entrance, Region
+
+from .smsa2_regions.smsa2_region_helper import Smsa2Location, Smsa2RegionName, Smsa2Region, Shine, BlueCoin
+from .smsa2_regions.world1 import (WORLD1)
+from .smsa2_regions.world2 import (WORLD2)
+from .smsa2_regions.world3 import (WORLD3)
+from .smsa2_regions.world4 import (WORLD4)
+from .smsa2_regions.world5 import (WORLD5)
+from .smsa2_regions.world6 import (WORLD6)
+from .smsa2_regions.world7 import (WORLD7)
+from .smsa2_regions.world8 import (WORLD8)
+from .smsa2_regions.world9 import (WORLD9)
+from .smsa2_regions.world10 import (WORLD10)
+from .smsa2_regions.world11 import (WORLD11)
+from .smsa2_regions.world12 import (WORLD12)
+from .smsa2_regions.goal import (GOAL)
 
 if TYPE_CHECKING:
     from . import Smsa2World
 
 
-def smsa2_requirements_satisfied(state: CollectionState, requirements: Requirements, world: "Smsa2World"):
-    my_nozzles: NozzleType = NozzleType.none
-    if state.has("Spray Nozzle", world.player):
-        my_nozzles |= NozzleType.spray
-    if state.has("Hover Nozzle", world.player):
-        my_nozzles |= NozzleType.hover
-    if state.has("Rocket Nozzle", world.player):
-        my_nozzles |= NozzleType.rocket
-    if state.has("Turbo Nozzle", world.player):
-        my_nozzles |= NozzleType.turbo
-    if state.has("Spray Nozzle", world.player) and state.has("Hover Nozzle", world.player):
-        my_nozzles |= NozzleType.sprayandhover
-    if state.has("Spray Nozzle", world.player) and state.has("Turbo Nozzle", world.player):
-        my_nozzles |= NozzleType.sprayandturbo
-    if state.has("Spray Nozzle", world.player) and state.has("Rocket Nozzle", world.player):
-        my_nozzles |= NozzleType.sprayandrocket
-    if state.has("Turbo Nozzle", world.player) and state.has("Hover Nozzle", world.player):
-        my_nozzles |= NozzleType.turboandhover
-    if state.has("Turbo Nozzle", world.player) and state.has("Rocket Nozzle", world.player):
-        my_nozzles |= NozzleType.turboandrocket
-    if state.has("Hover Nozzle", world.player) and state.has("Rocket Nozzle", world.player):
-        my_nozzles |= NozzleType.hoverandrocket
-    if state.has("Bubble Nozzle", world.player) and state.has("Bubble Nozzle", world.player):
-        my_nozzles |= NozzleType.bubble
-        
+def get_location_name_to_id():
+    dict_locs: dict[str, int] = {}
+    for smsa2_reg in ALL_REGIONS.values():
+        for shine_loc in smsa2_reg.shines:
+            dict_locs.update({f"{smsa2_reg.name} - {shine_loc.name}": len(dict_locs)+1})
+        for blue_loc in smsa2_reg.blue_coins:
+            dict_locs.update({f"{smsa2_reg.name} - {blue_loc.name}": len(dict_locs)+1})
+        for nozz_loc in smsa2_reg.nozzle_boxes:
+            dict_locs.update({f"{smsa2_reg.name} - {nozz_loc.name}": len(dict_locs)+1})
+    return dict_locs
 
 
-    for req in requirements.nozzles:
-        if my_nozzles & req == NozzleType(0):
-            return False
-
-    if requirements.shines is not None and not state.has("Shine Sprite", world.player, requirements.shines):
-        return False
-
-    if requirements.blues is not None and not state.has("Blue Coin", world.player, requirements.blues):
-        return False
-
-    if requirements.corona and not state.has("Shine Sprite", world.player, world.options.goal_level_shines.value):
-        return False
-
-    if requirements.location != "" and not state.can_reach(requirements.location, "Location", world.player):
-        return False
-
-    return True
-
-
-def smsa2_can_get_shine(state: CollectionState, shine: Shine, world: "Smsa2World"):
-    if world.options.difficulty == 0: return smsa2_requirements_satisfied(state, shine.standard, world)
-    elif world.options.difficulty == 1: return smsa2_requirements_satisfied(state, shine.hard, world)
-    elif world.options.difficulty == 2: return smsa2_requirements_satisfied(state, shine.expert, world)
-
-
-def smsa2_can_get_blue_coin(state: CollectionState, blue_coin: BlueCoin, world: "Smsa2World"):
-    if world.options.difficulty == 0: return smsa2_requirements_satisfied(state, blue_coin.standard, world)
-    elif world.options.difficulty == 1: return smsa2_requirements_satisfied(state, blue_coin.hard, world)
-    elif world.options.difficulty == 2: return smsa2_requirements_satisfied(state, blue_coin.expert, world)
-
-
-def smsa2_can_use_entrance(state: CollectionState, region: Smsa2Region, world: "Smsa2World"):
-    if region.ticketed:
-        return state.has(region.ticketed, world.player)
-    else:
-        return smsa2_requirements_satisfied(state, region.requirements, world)
-
-
-def make_shine_lambda(shine: Shine, world: "Smsa2World"):
-    return lambda state: smsa2_can_get_shine(state, shine, world)
-
-
-def make_blue_coin_lambda(blue_coin: BlueCoin, world: "Smsa2World"):
-    return lambda state: smsa2_can_get_blue_coin(state, blue_coin, world)
-
-
-def make_entrance_lambda(region: Smsa2Region, world: "Smsa2World"):
-    return lambda state: smsa2_can_use_entrance(state, region, world)
+ALL_REGIONS: dict[str, Smsa2Region] = {
+    "Manu": Smsa2Region("Menu"),
+    Smsa2RegionName.WORLD1: WORLD1,
+    Smsa2RegionName.WORLD2: WORLD2,
+    Smsa2RegionName.WORLD3: WORLD3,
+    Smsa2RegionName.WORLD4: WORLD4,
+    Smsa2RegionName.WORLD5: WORLD5,
+    Smsa2RegionName.WORLD6: WORLD6,
+    Smsa2RegionName.WORLD7: WORLD7,
+    Smsa2RegionName.WORLD8: WORLD8,
+    Smsa2RegionName.WORLD9: WORLD9,
+    Smsa2RegionName.WORLD10: WORLD10,
+    Smsa2RegionName.WORLD11: WORLD11,
+    Smsa2RegionName.WORLD12: WORLD12,
+    Smsa2RegionName.GOAL: GOAL
+    
+}
 
 
 def create_region(region: Smsa2Region, world: "Smsa2World"):
-    new_region = Region(region.name, world.player, world.multiworld)
+    curr_region = Region(region.name, world.player, world.multiworld)
+    world.multiworld.regions.append(curr_region)
+
+    if region.name == "Hub":
+        return curr_region
+
+    # Add Entrance to the parent region and set the requirements to be used later on
+    new_entrance: Entrance = world.get_region(region.parent_region).connect(curr_region)
+    new_entrance.requirements = region.requirements
+
+    # Require that the player has the ticket required for the region when ticket mode is enabled
+    curr_region.ticket_str = region.ticketed
+    add_rule(new_entrance, (lambda state, ticket_str=region.ticketed: state.has(ticket_str, world.player)))
+
     if world.options.shine_sanity == True or world.options.blue_coin_sanity == False:
         for shine in region.shines:
-            new_location = Smsa2Location(world.player, f"{region.display} - {shine.name}", shine.id, new_region)
-            new_location.access_rule = make_shine_lambda(shine, world)
-            new_region.locations.append(new_location)
-    if world.options.blue_coin_sanity == True:
+            if (region.trade and world.options.blue_coin_sanity.value > 0 and
+                len([reg_loc for reg_loc in curr_region.get_locations()]) >= world.options.trade_shine_maximum.value):
+                continue
+
+            shine_loc: Smsa2Location = Smsa2Location(world, f"{curr_region.name} - {shine.name}", region, smsa2_can_get_shine(shine, world))
+            curr_region.locations.append(shine_loc)
+
+    if world.options.blue_coin_sanity.value == True:
         for blue_coin in region.blue_coins:
-            new_location = Smsa2Location(
-                world.player, f"{region.display} - {blue_coin.name} Blue Coin", blue_coin.id, new_region)
-            new_location.access_rule = make_blue_coin_lambda(blue_coin, world)
-            new_region.locations.append(new_location)
+            blue_loc: Smsa2Location = Smsa2Location(world, f"{curr_region.name} - {blue_coin.name}", region, smsa2_can_get_blue_coin(blue_coin, world))
+            curr_region.add_event(blue_loc.name, "Blue Coin",
+                (lambda state, temp_loc=blue_loc: temp_loc.access_rule(state)))
+            curr_region.locations.append(blue_loc)
 
-    if region.name == "Goal Level":
-        new_location = Smsa2Location(world.player, "12-8 Shine", None, new_region)
-        new_location.access_rule = lambda state: smsa2_requirements_satisfied(state, Requirements(corona = True),
-                                                                            world)
-        new_region.locations.append(new_location)
+    for nozzle_box in region.nozzle_boxes:
+        nozzle_loc: Smsa2Location = Smsa2Location(world, f"{curr_region.name} - {nozzle_box.name}", region, nozzle_box.requirements)
+        curr_region.locations.append(nozzle_loc)
 
-        event_item = Smsa2Item("Victory", ItemClassification.progression, None, world.player)
-        new_location.place_locked_item(event_item)
-        world.multiworld.completion_condition[world.player] = lambda state: state.has("Victory", world.player)
+    return curr_region
 
-    return new_region
+def smsa2_can_get_shine(shine: Shine, world: "Smsa2World"):
+    if world.options.difficulty == 0: return shine.standard
+    elif world.options.difficulty == 1: return shine.hard
+    elif world.options.difficulty == 2: return shine.expert
 
+
+def smsa2_can_get_blue_coin(blue_coin: BlueCoin, world: "Smsa2World"):
+    if world.options.difficulty == 0: return blue_coin.standard
+    elif world.options.difficulty == 1: return blue_coin.hard
+    elif world.options.difficulty == 2: return blue_coin.expert
 
 def create_regions(world: "Smsa2World"):
-    regions = {
-        "Menu": Region("Menu", world.player, world.multiworld)
-    }
+    for region_name, region_data in ALL_REGIONS.items():
+        create_region(region_data, world)
 
-    for region in ALL_REGIONS:
-        regions[region.name] = create_region(region, world)
-        regions[region.parent_region].connect(regions[region.name], None, make_entrance_lambda(region, world))
-
-    world.multiworld.regions += regions.values()
+    goal_region: Region = world.get_region(Smsa2RegionName.GOAL)
+    goal_region.add_event(f"{Smsa2RegionName.GOAL} - 12-8 Shine", "Victory")

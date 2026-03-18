@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-from Options import Choice, DefaultOnToggle, PerGameCommonOptions, Range, Toggle
+from Options import Choice, DeathLink, PerGameCommonOptions, Range, Toggle
+
 
 class Difficulty(Choice):
     """The difficulty of the randomizer's logic.
@@ -90,3 +91,4 @@ class Smsa2Options(PerGameCommonOptions):
     shuffle_sunglasses: ShuffleSunglasses
     shuffle_shine_shirt: ShuffleShineShirt
     shuffle_cap: ShuffleCap
+    death_link: DeathLink

@@ -7,11 +7,11 @@ from gclib.rarc import RARC
 
 import Utils
 from CommonClient import logger
-from .SMSClient import CLIENT_VERSION, AP_WORLD_VERSION_NAME
+from .SMSA2Client import CLIENT_VERSION, AP_WORLD_VERSION_NAME
 from .Helper_Functions import StringByteFunction as sbf
 from .patch import update_dol_offsets
 
-RANDOMIZER_NAME = "Super Mario Sunshine"
+RANDOMIZER_NAME = "Super Mario Sunshine Arcade 2"
 
 class SuperMarioSunshineArcade2Randomizer:
     def __init__(self, clean_iso_path: str, randomized_output_file_path: str, ap_output_data: bytes, debug_flag=False):
@@ -47,7 +47,7 @@ class SuperMarioSunshineArcade2Randomizer:
         if AP_WORLD_VERSION_NAME in output_data:
             ap_world_version = output_data[AP_WORLD_VERSION_NAME]
         if ap_world_version != CLIENT_VERSION:
-            raise Utils.VersionException("Error! Server was generated with a different Super Mario Sunshine " +
+            raise Utils.VersionException("Error! Server was generated with a different Super Mario Sunshine Arcade 2" +
                     f"APWorld version.\nThe client version is {CLIENT_VERSION}!\nPlease verify you are using the " +
                     f"same APWorld as the generator, which is '{ap_world_version}'")
 

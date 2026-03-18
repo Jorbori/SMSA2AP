@@ -10,6 +10,7 @@ REGULAR_PROGRESSION_ITEMS: dict[str, int] = {
     "Hover Nozzle": 523001,
     "Rocket Nozzle": 523002,
     "Turbo Nozzle": 523003,
+    "Yoshi": 523013,
 }
 
 OTHER_ITEMS: dict[str, int] = {
